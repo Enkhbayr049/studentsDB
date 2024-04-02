@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>  
+  <title>Програмчлал</title> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="Functions.js"></script>  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Анги</h3>
+        <select id="uls1" onchange="swNames(value, 2)" multiple style="width:150px;"></select>          
+      </div>
+      <div class="col-sm-4">
+        <h3>Хичээл</h3>
+        <table id="tbl" style="width:150px; position: inherit; left: 70px;">
+        </table>        
+      </div>
+      <div class="col-sm-4" id="tdc">
+        <h3>Өгөгдөл</h3>
+        Нэр <input type="text" id="snm"><br><br>
+        <button id="tUpDt" onclick="fnUpDt(2)">Засварлах</button>
+        <button id="tIns" onclick="fnIns(2)">Нэмэх</button>
+        <button id="tDel" onclick="fnDlt(2)">Арилгах</button><br><br>
+        <textarea id="msg" rows=3 style="background-color: powderblue; border: none;"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      swClasses();
+  </script>
+</body>
+</html>

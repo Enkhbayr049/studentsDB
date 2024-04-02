@@ -1,0 +1,70 @@
+C:\Users\enkhb\OneDrive\Desktop\Lproject\Client\Students.html<!DOCTYPE html>
+<html>
+<head>  
+  <title>Програмчлал</title> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="Functions.js"></script>  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  select {
+    width: 150px; 
+  }
+
+  select > option {
+    transition: all 0.2s;
+  }
+
+  select > option:hover {
+    background-color: black;
+    color: white;
+  }
+
+  td {
+    transition: all 0.2s;
+    width: 150px;
+  }
+
+  td:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+
+  table {
+    margin-left: 105px;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Анги</h3>
+        <select id="uls1" onchange="swNames(value)" multiple></select>          
+      </div>
+      <div class="col-sm-4">
+        <h3>Оюутан</h3>
+        <table id="tbl"></table>
+      </div>
+      <div class="col-sm-4" id="tdc">
+        <h3>Өгөгдөл</h3>
+        <input type="text" id="snm"><br><br>
+        <textarea id="ads" rows="5"></textarea><br><br>
+        <button id="tUpDt" onclick="fnUpDt()">Засах</button>
+        <button id="tIns" onclick="fnIns()">Нэмэв</button>
+        <button id="tDel">Арилгах</button><br><br>
+        <textarea id="msg" rows="5"></textarea><br><br>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      swClasses();
+      // swNames();
+  </script>
+</body>
+</html>
