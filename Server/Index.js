@@ -34,8 +34,10 @@ app.post('/Nms', (req, res) => {
 });
 
 app.post('/Fnd', (req, res) => {
-  var cd = req.body.std;
-  con.query("SELECT * FROM Students WHERE Code =" + cd, function (err, result) { res.send(result); });
+  var cd = req.body.cd;
+  var cdA = req.body.cdA;
+  con.query("SELECT * FROM Students WHERE Code =" + cd + " AND CodeA=" + cdA,
+  function (err, result) { res.send(result); });
 });
 
 
@@ -43,7 +45,8 @@ app.post('/UpDt', (req, res) => {
   var cd = req.body.cd;
   var ner = req.body.ner;
   var ads = req.body.ads;
-  con.query("UPDATE Students SET Name='" + ner + "', Address='" + ads + "' WHERE Code =" + cd,
+  var cdA = req.body.cdA;
+  con.query("UPDATE Students SET Name='" + ner + "', Address='" + ads + "' WHERE Code =" + cd + "AND CodeA =" + cdA,
   function (err, result) { res.send(result); });
 });
 

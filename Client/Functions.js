@@ -45,7 +45,7 @@ async function swClasses() {
                   var ul1 = document.getElementById("uls1");
                   for (let i = 0; i < result.length; i++) {
                         var op = document.createElement("option");
-                        op.value = result[i].CodeA; 
+                        op.value = result[i].CodA; 
                         op.text = result[i].Name;
                         ul1.add(op);          
                   }
@@ -93,7 +93,7 @@ function swAdr(obj) {
       cod = cds[obj.rowIndex];
       fetch("http://localhost:8822/Fnd", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( { std : cod } )
+            body: JSON.stringify( { cd : cod, cdA : codA } )
       })
       .then(response => response.json())
       .then(result => {
@@ -114,7 +114,7 @@ function fnUpDt() {
       var ads1 = document.getElementById("ads").value;
       fetch("http://localhost:8822/UpDt", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( { cd : cod, ner : ners, ads : ads1 } )
+            body: JSON.stringify( { cd : cod, ner : ners, ads : ads1, cdA : codA } )
       })
       .then(response => response.json())
       .catch((error) => {
@@ -125,12 +125,13 @@ function fnUpDt() {
 
 function fnIns() {
       var cd = Math.max(...cds) + 1;
-      alert(cd);
+      cds.push(cd);
+
       var ners = document.getElementById("snm").value;
       var ads1 = document.getElementById("ads").value;
       fetch("http://localhost:8822/Ins", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( { cd : cd, ner : ners, ads : ads1 } )
+            body: JSON.stringify( { cd : cd, ner : ners, ads : ads1, cdA : codA } )
       })
       .then(response => response.json())
       .catch((error) => {
