@@ -45,7 +45,7 @@ async function swClasses() {
                   var ul1 = document.getElementById("uls1");
                   for (let i = 0; i < result.length; i++) {
                         var op = document.createElement("option");
-                        op.value = result[i].CodA; 
+                        op.value = result[i].CodeA; 
                         op.text = result[i].Name;
                         ul1.add(op);          
                   }
