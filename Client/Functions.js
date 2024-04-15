@@ -1,6 +1,6 @@
 var cds;
-var  codA = 0;
-var cod = [];
+var  codA;
+var cod;
 
 function dfDt(dt1, dt2) {
       let df = dt1.getTime() - dt2.getTime();
@@ -89,15 +89,16 @@ async function swNames(val) {
       .catch((error) => {
             document.getElementById("msg").value = error;
       });
+      cod = -1;
 }
 
 function swAdr(obj) {
       document.getElementById("msg").value = "";
       // alert(obj.innerText);
-      cod = cds[obj.rowIndex];
+      cod = obj.rowIndex;
       fetch("http://localhost:8822/Fnd", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( { cd : cod, cdA : codA } )
+            body: JSON.stringify( { cd : cds[cod], cdA : codA } )
       })
       .then(response => response.json())
       .then(result => {
@@ -124,7 +125,7 @@ function fnUpDt() {
       var ads1 = document.getElementById("ads").value;
       fetch("http://localhost:8822/UpDt", {
             method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify( { cd : cod, ner : ners, ads : ads1, cdA : codA } )
+            body: JSON.stringify( { cd : cds[cod], ner : ners, ads : ads1, cdA : codA } )
       })
       .then(response => response.json())
       .catch((error) => {
@@ -161,9 +162,12 @@ function fnIns() {
 
 function del() {
       if( codA == 0 ) { document.getElementById("msg").value = "Анги сонгоогүй байна"; return; } 
-      if( cod.length <= 0 ) { document.getElementById("msg").value = "Хүн сонгоогүй байна"; return; } 
+      if( cod == -1 ) { document.getElementById("msg").value = "Хүн сонгоогүй байна"; return; } 
 
-      var cd = cod;
+      if (confirm("Are you sure bro!") == true) {
+      text = "Ustgah gej baina!";
+
+      var cd = cds[cod];
       fetch("http://localhost:8822/Del", {
             method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify( { cd : cd, cdA : codA } )
@@ -173,17 +177,9 @@ function del() {
             document.getElementById("msg").value = error; return;
       });
       document.getElementById("msg").value = 'Устгасан';
+      var table = document.getElementById('tbl');
+      table.deleteRow(cod);
+      var snm = document.getElementById("snm").value = "";
+      var adr = document.getElementById("ads").value = "";
+          } 
 }
-
-// table.innerHTML = "";
-// if (1 <= result.length)
-// {
-//       const tableData = 
-//       result.map(value => {
-//             `<tr onclick="swAds(this)">
-//                   <td>${value.Name}</td> 
-//                   <td>${value.Name}</td>       
-//                   </tr>`             
-//       }).join('');
-//       table.innerHTML = tableData;                
-// }
