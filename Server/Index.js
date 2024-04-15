@@ -24,6 +24,13 @@ con.connect(function(err) {
     // });
 });
 
+// con.connect(function(err) {
+//   con.query("SELECT * FROM Students", function (err, result) { 
+//   if (err) throw err;
+//   console.log(result); 
+// }); 
+// });
+
 app.post('/Cls', (req, res) => {
   con.query("SELECT * FROM Classes", function (err, result) { res.send(result); });
 });
@@ -46,7 +53,7 @@ app.post('/UpDt', (req, res) => {
   var ner = req.body.ner;
   var ads = req.body.ads;
   var cdA = req.body.cdA;
-  con.query("UPDATE Students SET Name='" + ner + "', Address='" + ads + "' WHERE Code =" + cd + "AND CodeA =" + cdA,
+  con.query("UPDATE Students SET Name='" + ner + "', Address='" + ads + "' WHERE Code =" + cd + " AND CodeA =" + cdA,
   function (err, result) { res.send(result); });
 });
 
@@ -57,6 +64,13 @@ app.post('/Ins', (req, res) => {
   var cdA = req.body.cdA;
   con.query("INSERT INTO Students (Code, Name, Address, CodeA)" +
   " VALUES (" + cd + " , '" + ner + "' , '" + ads + "' , " + cdA + ")" ,
+  function (err, result) { res.send(result); });
+});
+
+app.post('/Del', (req, res) => {
+  var cd = req.body.cd;
+  var cdA = req.body.cdA;
+  con.query("DELETE FROM Students WHERE Code = " + cd + " AND CodeA = " + cdA,
   function (err, result) { res.send(result); });
 });
 

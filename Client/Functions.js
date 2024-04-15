@@ -1,4 +1,6 @@
-var cds, codA, cod;
+var cds;
+var  codA = 0;
+var cod = [];
 
 function dfDt(dt1, dt2) {
       let df = dt1.getTime() - dt2.getTime();
@@ -59,6 +61,8 @@ async function swClasses() {
 async function swNames(val) {
 
       codA = val;
+      document.getElementById("snm").value = "";
+      document.getElementById("ads").value = "";
       await fetch("http://localhost:8822/Nms", {
             method: "POST", headers: { "Content-Type": "application/json" },
             body: JSON.stringify( { cls : val } )
@@ -110,6 +114,12 @@ function swAdr(obj) {
 }
 
 function fnUpDt() {
+      var snm = document.getElementById("snm").value;
+      var adr = document.getElementById("ads").value;
+      if( codA == 0 ) { document.getElementById("msg").value = "Анги сонгоогүй байна"; return; } 
+      if(snm.trim() == '') { document.getElementById("msg").value = "Нэр бичээгүй байна"; return; }
+      if(adr.trim() == '') { document.getElementById("msg").value = "Хаяг бичээгүй байна"; return; }
+      
       var ners = document.getElementById("snm").value;
       var ads1 = document.getElementById("ads").value;
       fetch("http://localhost:8822/UpDt", {
@@ -120,10 +130,16 @@ function fnUpDt() {
       .catch((error) => {
             document.getElementById("msg").value = error; return;
       });
-      document.getElementById("msg").value = 'zasav';
+      document.getElementById("msg").value = 'Зассан';
 }
 
 function fnIns() {
+      var snm = document.getElementById("snm").value;
+      var adr = document.getElementById("ads").value;
+      if( codA == 0 ) { document.getElementById("msg").value = "Анги сонгоогүй байна"; return; } 
+      if(snm.trim() == '') { document.getElementById("msg").value = "Нэр бичээгүй байна"; return; }
+      if(adr.trim() == '') { document.getElementById("msg").value = "Хаяг бичээгүй байна"; return; }
+
       var cd = Math.max(...cds) + 1;
       cds.push(cd);
 
@@ -137,7 +153,26 @@ function fnIns() {
       .catch((error) => {
             document.getElementById("msg").value = error; return;
       });
-      document.getElementById("msg").value = 'nemev';
+      document.getElementById("msg").value = 'Нэмсэн';
+
+      var table = document.getElementById('tbl');
+      table.innerHTML += `<tr onclick="swAdr(this)"> <td>${snm}</td> </tr>`
+}
+
+function del() {
+      if( codA == 0 ) { document.getElementById("msg").value = "Анги сонгоогүй байна"; return; } 
+      if( cod.length <= 0 ) { document.getElementById("msg").value = "Хүн сонгоогүй байна"; return; } 
+
+      var cd = cod;
+      fetch("http://localhost:8822/Del", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify( { cd : cd, cdA : codA } )
+      })
+      .then(response => response.json())
+      .catch((error) => {
+            document.getElementById("msg").value = error; return;
+      });
+      document.getElementById("msg").value = 'Устгасан';
 }
 
 // table.innerHTML = "";
